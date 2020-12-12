@@ -1,0 +1,22 @@
+name: actions
+
+on: [push, pull_request]
+jobs:
+  api:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build api image
+        run: docker-compose up --build api
+      - name: Run api tests
+        run: docker-compose run api bundle exec rails test
+
+  client:
+    runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v2
+          - name: Build client image
+            run: docker-compose up --build client
+          - name: Run client tests
+            run: docker-compose run client yarn run test:unit
+
