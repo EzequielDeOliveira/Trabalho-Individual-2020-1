@@ -20,3 +20,13 @@ services:
       - "3000:3000"
     depends_on:
       - db
+
+  client:
+    build: ./client
+    command: sh -c "yarn install && yarn dev"
+    ports: 
+      - 8080:8080
+    volumes: 
+      - /client
+    depends_on:
+      - api
