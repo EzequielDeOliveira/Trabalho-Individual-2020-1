@@ -4,4 +4,6 @@ WORKDIR /client
 
 COPY package*.json /client
 
+RUN yarn install
+
 COPY . .
