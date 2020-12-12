@@ -12,6 +12,3 @@ RUN bundle install
 
 COPY . .
 
-RUN chmod +x entrypoint.sh
-ENTRYPOINT [ "/api/entrypoint.sh" ]
-

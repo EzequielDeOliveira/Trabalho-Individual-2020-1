@@ -7,7 +7,11 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: Build api image
-        run: docker-compose up --build -d api 
+        run: docker-compose up --build -d api
+      - name: Create db
+        run: docker-compose run api rake db:create
+      - name: Run migrations
+        run: docker-compose run api rake db:migrate
       - name: Run api tests
         run: docker-compose run api bundle exec rails test
 
