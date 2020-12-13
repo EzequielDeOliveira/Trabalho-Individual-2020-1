@@ -15,7 +15,7 @@ services:
     environment: 
       - DATABASE_PASSWORD=password
     volumes:
-      - ./api:/api
+      - ./api:./
     ports:
       - "3000:3000"
     depends_on:
@@ -27,7 +27,7 @@ services:
     ports: 
       - 8080:8080
     volumes: 
-      - ./client:/client
+      - ./client:./
 
 volumes: 
   db:
