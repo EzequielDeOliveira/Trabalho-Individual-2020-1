@@ -20,7 +20,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        href="https://github.com/andre-filho/fretadao-challenge"
+        href="https://github.com/EzequielDeOliveira/Trabalho-Individual-2020-1"
         target="_blank"
         icon
       >
