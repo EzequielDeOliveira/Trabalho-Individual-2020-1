@@ -3,23 +3,28 @@ version: "3.8"
 services:
 
   db:
-    image: postgres
+    image: postgres:13
     environment: 
-      - POSTGRES_PASSWORD=password
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
     volumes:
       - db:/var/lib/postgresql/data
+    networks: 
+      - api_network
 
   api:
     build: ./api
+    restart: always
     command: rails s -p 3000 -b '0.0.0.0'
     environment: 
-      - DATABASE_PASSWORD=password
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
     volumes:
       - ./api:/api
     ports:
       - "3000:3000"
     depends_on:
       - db
+    networks: 
+      - api_network
 
   client:
     build: ./client
@@ -29,6 +34,9 @@ services:
     volumes:
       - ./client:/client
       - /client/node_modules
+
+networks: 
+  api_network:
 
 volumes: 
   db:
