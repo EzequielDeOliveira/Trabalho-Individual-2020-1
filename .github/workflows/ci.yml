@@ -9,11 +9,11 @@ jobs:
       - name: Build api image
         run: docker-compose up --build -d api
       - name: Create db
-        run: docker-compose run api rake db:create
+        run: docker-compose exec -T api rake db:create
       - name: Run migrations
-        run: docker-compose run api rake db:migrate
+        run: docker-compose exec -T api rake db:migrate
       - name: Run api tests
-        run: docker-compose run api bundle exec rails test
+        run: docker-compose exec -T api bundle exec rails test
 
   client:
         runs-on: ubuntu-latest
@@ -22,5 +22,5 @@ jobs:
           - name: Build client image
             run: docker-compose up --build -d client 
           - name: Run client tests
-            run: docker-compose run client yarn run test:unit
+            run: docker-compose exec -T client yarn run test:unit
 

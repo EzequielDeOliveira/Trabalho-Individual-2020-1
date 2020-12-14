@@ -23,13 +23,12 @@ services:
 
   client:
     build: ./client
-    command: sh -c "yarn install && yarn dev"
+    command: yarn dev   
     ports: 
       - 8080:8080
-    volumes: 
-      - ./client:client
-      - ./node_modules:/client/node_modules
+    volumes:
+      - ./client:/client
+      - /client/node_modules
 
 volumes: 
   db:
-  node_modules:
