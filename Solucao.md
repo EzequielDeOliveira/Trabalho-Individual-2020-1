@@ -2,6 +2,7 @@
 
 [![Actions Status](https://github.com/EzequielDeOliveira/Trabalho-Individual-2020-1/workflows/CI/badge.svg)](https://github.com/EzequielDeOliveira/Trabalho-Individual-2020-1/actions)
 [![Maintainability](https://api.codeclimate.com/v1/badges/a99a88d28ad37a79dbf6/maintainability)](https://codeclimate.com/github/codeclimate/codeclimate/maintainability)
+[![codecov](https://codecov.io/gh/EzequielDeOliveira/Trabalho-Individual-2020-1/branch/master/graph/badge.svg?token=JD8TI6MNOH)](https://codecov.io/gh/EzequielDeOliveira/Trabalho-Individual-2020-1)
 
 **Matricula**: 16/0119316
 
@@ -27,7 +28,8 @@ Sobre a integração contínua foi a utilizada a ferramenta disponibilizada pelo
 
 Por escolha a branch `master` não está protegida, mas considerando um cenário onde só versões estáveis vão pra master via **Pull Request**, o ci é executado reagindo a **push** e **pull request** na branch master.
 
-para qualidade de código foi utilizado o code climate, que também e responsável pela cobertura de teste, porém por ser dois projetos diferentes, a cobertura de código não  foi trabalhada usando o code climate.
+Sobre as métricas, foi utilizado o ***Code Climate*** para qualidade de código, depois de algumas pesquisas, precisei de uma ferramenta que fizesse reporte parcial de cobertura de código, a ferramenta usada foi o ***Codecov***, Essa ferramenta permite o reporte parcial de cobertura de testes, mas só foi feito esse trabalho de report de cobertura para o client por não ter conhecimento suficiente para a ferramenta até a data de entrega, para isso foi adicionado uma nova etapa ao CI que gera as métricas e sobe os reports.
+
 
 # Deploy continuo
 Para o deploy continuo, duas ferramentas foram utilizadas, novamente ***Github CI*** e agora ***Digital Ocean*** por conta do acesso para estudantes concedido pelo pacote do github, nesse caso foi adicionada mais uma etapada para o CI, quando a branch `master`recebe uma ação de ***push*** a versão de produção recebe a atualização. 
@@ -79,3 +81,5 @@ Para acessar o projeto que está rodando em produção basta usar as seguintes U
 - [GitHub Actions](https://github.com/EzequielDeOliveira/Trabalho-Individual-2020-1/actions)
 
 - [Code Climate](https://codeclimate.com/github/EzequielDeOliveira/Trabalho-Individual-2020-1)
+
+- [CodeCov](https://codecov.io/gh/EzequielDeOliveira/Trabalho-Individual-2020-1)

@@ -6,7 +6,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_PASSWORD: password
-      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Build api image
@@ -29,6 +28,9 @@ jobs:
           
   coverage:
     runs-on: ubuntu-latest
+    env:
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+      CI: true
     defaults:
       run:
         working-directory: ./client
@@ -40,3 +42,4 @@ jobs:
           yarn add codecov@3.8.1
           yarn test:unit
           ./node_modules/.bin/codecov
+       
