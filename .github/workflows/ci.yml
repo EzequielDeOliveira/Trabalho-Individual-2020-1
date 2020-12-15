@@ -6,6 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DATABASE_PASSWORD: password
+      CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
     steps:
       - uses: actions/checkout@v2
       - name: Build api image
@@ -18,30 +19,24 @@ jobs:
         run: docker-compose exec -T api bundle exec rails test
 
   client:
-        runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@v2
-          - name: Build client image
-            run: docker-compose up --build -d client 
-          - name: Run client tests
-            run: docker-compose exec -T client yarn run test:unit
-
-  coverage:
-    name: coverage
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@master
-    - uses: actions/setup-node@master
-      with:
-        node-version: '12'
-    - name: Install Dependencies
-      working-directory: ./client
-      run: |
-        npm install -g yarn
-        yarn --cwd client install
-        yarn --cwd client build
-    - uses: paambaati/codeclimate-action@v2.2.4
-      env:
-        CC_TEST_REPORTER_ID: e46ea110c60687d18cac3294d087727dd856240b8c96f8e0aec8605ef2f10523
-      with:
-        coverageCommand: yarn --cwd client run test:unit --coverage
+      - uses: actions/checkout@v2
+      - name: Build client image
+        run: docker-compose up --build -d client 
+      - name: Run client tests
+        run: docker-compose exec -T client yarn run test:unit
+          
+  coverage:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./client
+    steps:
+      - uses: actions/checkout@v2
+      - name: Send client coverage reports
+        run: |
+          yarn install
+          yarn add codecov@3.8.1
+          yarn test:unit
+          ./node_modules/.bin/codecov
